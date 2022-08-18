@@ -9,7 +9,7 @@ import eda.movie.port.repository.MovieRepository;
 @Service
 public class MovieService {
 
-  @Autowired MovieRepository movieRepository;
+  @Autowired private MovieRepository movieRepository;
 
   public Movie createMovie(final Movie movie) {
     return movieRepository.create(movie);

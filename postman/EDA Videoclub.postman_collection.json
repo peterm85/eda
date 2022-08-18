@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "4661e058-71cf-4e20-a41f-a1cb52cdf146",
+		"name": "EDA Videoclub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5278941"
+	},
+	"item": [
+		{
+			"name": "Kafka Connect API",
+			"item": [
+				{
+					"name": "GET connectors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8083/connectors?expand=info",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							],
+							"query": [
+								{
+									"key": "expand",
+									"value": "info"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST connector",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\": \"mongo-source-movie\",\r\n    \"config\": {\r\n        \"connector.class\":\"com.mongodb.kafka.connect.MongoSourceConnector\",\r\n        \"connection.uri\":\"mongodb://mongo:27017\",\r\n        \"database\":\"videoclub\",\r\n        \"collection\":\"movies\",\r\n        \"tasks.max\": 1,\r\n        \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n        \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n        \"mongo.errors.tolerance\": \"all\",\r\n        \"mongo.errors.log.enable\": \"true\",\r\n        \"poll.await.time.ms\": \"2000\",\r\n        \"poll.max.batch.size\": \"1000\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/connectors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE connector",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/connectors/{CONNECTOR_NAME}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"connectors",
+								"{CONNECTOR_NAME}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imdbId\":\"1234\",\r\n    \"name\":\"Star Wars\",\r\n    \"stock\":\"3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/videoclub/movie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"videoclub",
+						"movie"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Pedro\",\r\n    \"address\": \"Valdelasfuentes street, 13th\",\r\n    \"age\":\"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8091/videoclub/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"videoclub",
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

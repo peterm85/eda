@@ -32,12 +32,12 @@ public class MovieControllerImpl implements MovieController {
 
   @Override
   @PostMapping(value = MOVIE_PATH)
-  public ResponseEntity<MovieResponse> create(@Valid @NotNull MovieRequest request) {
+  public ResponseEntity<MovieResponse> create(@Valid @NotNull final MovieRequest request) {
 
     final Movie movie = movieRequestToMovieConverter.convert(request);
-    final MovieResponse filmResponse =
+    final MovieResponse response =
         movieToMovieResponseConverter.convert(movieService.createMovie(movie));
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(filmResponse);
+    return ResponseEntity.status(HttpStatus.CREATED).body(response);
   }
 }

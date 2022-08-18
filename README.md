@@ -8,6 +8,8 @@
 ![Architecture diagram](docs/arch-diagram.png)
 
 ## How to deploy
+1. Execute ``docker-compose up``
+2. Load source and sink kafka-connectors via Landoop Kafka Development Environment or via Kafka Connect API with Postman
 
 ## Important URLs
 * **Kafka cluster source code:** https://github.com/lensesio/fast-data-dev
