@@ -18,7 +18,7 @@ import eda.movie.port.rest.api.model.MovieRequest;
 import eda.movie.port.rest.api.model.MovieResponse;
 import eda.movie.service.MovieService;
 
-@RequestMapping("/eda")
+@RequestMapping("/videoclub")
 @RestController
 public class MovieControllerImpl implements MovieController {
 

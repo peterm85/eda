@@ -8,8 +8,6 @@ services:
       - "27017:27017"
     environment:
       - MONGO_INITDB_DATABASE=eda
-      #- MONGO_INITDB_ROOT_USERNAME=admin
-      #- MONGO_INITDB_ROOT_PASSWORD=Passwd#01
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     command: [ "--replSet", "rs0", "--bind_ip_all" ]
@@ -20,43 +18,19 @@ services:
     ports:
       - "9090:8081"
     environment:
-      #- ME_CONFIG_MONGODB_ADMINUSERNAME=admin
-      #- ME_CONFIG_MONGODB_ADMINPASSWORD=Passwd#01
       - ME_CONFIG_MONGODB_SERVER=mongo
     restart: unless-stopped
-
-#  zookeeper:
-#    image: wurstmeister/zookeeper:latest
-#    container_name: zookeeper
-#    ports:
-#      - "2181:2181"
-
-#  kafka:
-#    image: wurstmeister/kafka:latest
-#    container_name: kafka
-#    ports:
-#      - "9092:9092"
-#    expose:
-#      - "9093"
-#    environment:
-#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-#      KAFKA_ADVERTISED_LISTENERS: INSIDE://kafka:9093,OUTSIDE://localhost:9092
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
-#      KAFKA_LISTENERS: INSIDE://0.0.0.0:9093,OUTSIDE://0.0.0.0:9092
-#      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
-#    depends_on:
-#      - zookeeper
-
-#  kafka-ui:
-#    image: provectuslabs/kafka-ui:latest
-#    container_name: kafka-ui
-#    ports:
-#      - "9001:8080"
-#    depends_on:
-#      - zookeeper
-#      - kafka
-#    restart: always
-#    environment:
-#      - KAFKA_CLUSTERS_0_NAME=local
-#      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9093
-#      - KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper:2181
+    
+  kafka-cluster:
+    image: landoop/fast-data-dev:cp3.3.0
+    environment:
+      ADV_HOST: 127.0.0.1
+      RUNTESTS: 0           # Disable running-tests so the cluster starts faster
+    ports:
+      - 2181:2181           # Zookeeper
+      - 3030:3030           # Landoop UI
+      - 8081-8083:8081-8083 # REST Proxy, Schema Registry and Kafka Connect
+      - 9581-9585:9581-9585 # JMX Ports
+      - 9092:9092           # Kafka Broker 
+    volumes:
+      - ./kafka-connect/connectors/mongo-kafka-connect-1.7.0-confluent.jar:/connectors/mongo-kafka-connect-1.7.0-confluent.jar

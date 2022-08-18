@@ -1,0 +1,18 @@
+# eda-videoclub project
+
+
+## Use cases diagram
+![Use cases diagram](docs/use-cases-diagram.png)
+
+## Architecture diagram
+![Architecture diagram](docs/arch-diagram.png)
+
+## How to deploy
+
+## Important URLs
+* **Kafka cluster source code:** https://github.com/lensesio/fast-data-dev
+* **Kafka cluster image:** https://hub.docker.com/r/landoop/fast-data-dev/dockerfile
+* **Kafka cluster UI:** http://localhost:3030/
+* **MongoDb connector:** https://www.confluent.io/hub/mongodb/kafka-connect-mongodb
+* **Mongo Express UI:** http://localhost:9090/db/videoclub/
+* **Swagger UI:** http://localhost:{INSTANCE_PORT}/swagger-ui/index.html

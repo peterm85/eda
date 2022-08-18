@@ -6,31 +6,38 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.7.2</version>
- 		<relativePath/> <!--lookup parent from repository -->
+ 		<relativePath/>
 	</parent>
 	<groupId>eda</groupId>
-	<artifactId>eda-movie-sv</artifactId>
+	<artifactId>movie-sv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eda-movie-sv</name>
+	<name>movie-sv</name>
 	<description>Service to manage movies</description>
 	<properties>
 		<java.version>11</java.version>
+		<swagger.version>3.0.0</swagger.version>
 	</properties>
 	<dependencies>
+	    <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
 		<dependency>
-		    <groupId>io.swagger</groupId>
-		    <artifactId>swagger-annotations</artifactId>
-		    <version>1.6.6</version>
-		</dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swagger.version}</version>
+        </dependency>
+        
 		<dependency>
 		    <groupId>javax.validation</groupId>
 		    <artifactId>validation-api</artifactId>
