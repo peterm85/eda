@@ -84,13 +84,13 @@
 			]
 		},
 		{
-			"name": "Create movie",
+			"name": "Register movie",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"imdbId\":\"1234\",\r\n    \"name\":\"Star Wars\",\r\n    \"stock\":\"3\"\r\n}",
+					"raw": "{\r\n    \"imdbId\":\"1234567891\",\r\n    \"name\":\"Kill Bill\",\r\n    \"stock\":\"5\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,6 +136,35 @@
 					"path": [
 						"videoclub",
 						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Booking movie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"imdbId\": \"1234567890\",\r\n    \"userId\": \"62ff56051713d57a75dc1726\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/videoclub/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"videoclub",
+						"booking"
 					]
 				}
 			},
