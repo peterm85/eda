@@ -1,0 +1,6 @@
+spring:  
+  data:
+    mongodb:
+      uri: mongodb://mongo:27017/?authSource=admin
+      database: videoclub
+      auto-index-creation: true

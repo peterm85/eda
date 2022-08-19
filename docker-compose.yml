@@ -54,3 +54,13 @@ services:
     depends_on:
      - mongo
      - kafka-cluster
+     
+  booking-sv:
+    image: petermichael85/booking-sv:latest
+    build: ./booking-sv
+    container_name: booking-sv
+    ports:
+     - "8092:8080"
+    depends_on:
+     - mongo
+     - kafka-cluster
