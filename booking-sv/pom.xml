@@ -3,14 +3,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>eda.service</groupId>
+	<groupId>eda.videoclub.service</groupId>
 	<artifactId>booking-sv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>booking-sv</name>
 	<description>Service to manage bookings</description>
 	
 	<parent>
-		<groupId>eda</groupId>
+		<groupId>eda.videoclub</groupId>
 		<artifactId>core</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
@@ -34,5 +34,22 @@
             <artifactId>springfox-boot-starter</artifactId>
         </dependency>
 	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

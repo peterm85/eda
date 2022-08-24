@@ -1,6 +1,13 @@
 spring:  
   data:
     mongodb:
-      uri: mongodb://mongo:27017/?authSource=admin
       database: videoclub
       auto-index-creation: true
+
+user-sv:
+  groupId: user-sv
+  topic:
+    consume:
+      bookingCreated: videoclub-bookings-created
+    produces:
+      userValidated: videoclub-user-validated

@@ -1,0 +1,8 @@
+server:
+  port: 8091 
+spring:  
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/?authSource=admin
+  kafka:
+    bootstrap-servers: localhost:9092

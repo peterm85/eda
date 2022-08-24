@@ -3,17 +3,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>eda.service</groupId>
-	<artifactId>user-sv</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>user-sv</name>
 	<description>Service to manage users</description>
+	<groupId>eda.videoclub.service</groupId>
+	<artifactId>user-sv</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	
 	<parent>
-		<groupId>eda</groupId>
+		<groupId>eda.videoclub</groupId>
 		<artifactId>core</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
+	
+	<properties>
+        <java.version>11</java.version>
+    </properties>
 	
 	<dependencies>
 	    <dependency>
@@ -24,6 +30,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
@@ -33,6 +44,28 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>eda.videoclub</groupId>
+            <artifactId>kafka-messaging</artifactId>
+        </dependency>
 	</dependencies>
+	
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

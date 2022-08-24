@@ -23,8 +23,10 @@ services:
     
   kafka-cluster:
     image: landoop/fast-data-dev:cp3.3.0
+    container_name: kafka-cluster
     environment:
-      ADV_HOST: 127.0.0.1
+      ADV_HOST: kafka-cluster
+#      ADV_HOST: localhost
       RUNTESTS: 0           # Disable running-tests so the cluster starts faster
     ports:
       - 2181:2181           # Zookeeper

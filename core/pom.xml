@@ -10,9 +10,9 @@
         <version>2.7.2</version>
     </parent>
 
-    <groupId>eda</groupId>
+    <groupId>eda.videoclub</groupId>
     <artifactId>core</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <repositories>
@@ -25,7 +25,7 @@
 
     <properties>
         <!-- core lib version -->
-        <revision>0.0.1-SNAPSHOT</revision>
+<!--         <revision>0.0.1-SNAPSHOT</revision> -->
 
         <!-- java, spring and maven compiler versions -->
         <java.version>11</java.version>
@@ -33,6 +33,10 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
+        <!-- plugins -->
+        <flatten-maven-plugin.version>1.2.7</flatten-maven-plugin.version>
+        <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+        
         <!-- libs -->
         <swagger.version>3.0.0</swagger.version>
 
@@ -59,11 +63,21 @@
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-
+            <!-- CORE - components -->
+            <dependency>
+                <groupId>eda.videoclub</groupId>
+                <artifactId>kafka-messaging</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
         <!-- lombok & logs -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -74,13 +88,6 @@
 		    <groupId>javax.validation</groupId>
 		    <artifactId>validation-api</artifactId>
 		</dependency>
-		<!-- debug -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
         <!-- test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,20 +97,39 @@
     </dependencies>
 
     <build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>flatten-maven-plugin</artifactId>
+                    <version>${flatten-maven-plugin.version}</version>
+                    <configuration>
+                        <updatePomFile>true</updatePomFile>
+                        <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>flatten</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>flatten</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>flatten.clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 
+    <modules>
+        <module>kafka-messaging</module>
+    </modules>
+    
 </project>
