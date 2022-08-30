@@ -3,3 +3,10 @@ spring:
     mongodb:
       database: videoclub
       auto-index-creation: true
+movie-sv:
+  groupId: movie-sv
+  topic:
+    consume:
+      userValidated: videoclub-user-validated
+    produces:
+      movieReserved: videoclub-movie-reserved

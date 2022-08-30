@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class UserValidatedEvent {
+public class MovieReservedEvent {
 
   private String bookingId;
 

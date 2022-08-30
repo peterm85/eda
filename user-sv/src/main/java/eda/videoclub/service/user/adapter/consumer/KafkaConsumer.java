@@ -6,21 +6,21 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 import eda.videoclub.service.user.adapter.consumer.wrapper.BookingCreatedEventWrapperMessage;
-import eda.videoclub.service.user.domain.entity.UserValidation;
+import eda.videoclub.service.user.command.UserValidationCommand;
+import eda.videoclub.service.user.command.handler.UserValidationCommandHandler;
 import eda.videoclub.service.user.port.consumer.EventConsumer;
-import eda.videoclub.service.user.service.UserService;
 
 @Component
 public class KafkaConsumer implements EventConsumer {
 
   @Autowired private BookingCreatedEventToUserValidationConverter converter;
-  @Autowired private UserService userService;
+  @Autowired private UserValidationCommandHandler userValidationCommandHandler;
 
   @Override
   @KafkaListener(
       topics = "#{'${user-sv.topic.consume.bookingCreated}'}",
       groupId = "#{'${user-sv.groupId}'}",
-      containerFactory = "kafkaListenerContainerFactory",
+      containerFactory = "kafkaContainerFactory",
       properties = {
         "key.deserializer=org.springframework.kafka.support.serializer.JsonDeserializer",
         "spring.json.value.default.type=eda.videoclub.service.user.adapter.consumer.wrapper.BookingCreatedEventWrapperMessage",
@@ -28,8 +28,8 @@ public class KafkaConsumer implements EventConsumer {
       })
   public void listen(@Payload final BookingCreatedEventWrapperMessage event) {
 
-    final UserValidation userValidationCommand = converter.convert(event.getPayload());
+    final UserValidationCommand userValidationCommand = converter.convert(event.getPayload());
 
-    userService.validate(userValidationCommand);
+    userValidationCommandHandler.handle(userValidationCommand);
   }
 }

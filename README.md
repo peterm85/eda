@@ -8,9 +8,9 @@
 ![Architecture diagram](docs/arch-diagram.png)
 
 ## How to deploy
-1. Run ``mvn -B clean package`` in every component (core and services)
+1. Run ``mvn -B clean install`` in core and service components
 2. Run ``docker-compose up``
-3. Load source and sink kafka-connectors via Landoop Kafka Development Environment or via Kafka Connect API with Postman
+3. Load source and sink kafka-connectors via [Landoop Kafka Development Environment](http://localhost:3030/) or via Kafka Connect API using Postman
 
 ## Important URLs
 * **Kafka cluster source code:** https://github.com/lensesio/fast-data-dev

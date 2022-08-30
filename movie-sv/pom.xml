@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
+	<name>movie-sv</name>
+	<description>Service to manage movies</description>
 	<groupId>eda.videoclub.service</groupId>
 	<artifactId>movie-sv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movie-sv</name>
-	<description>Service to manage movies</description>
 	
 	<parent>
 		<groupId>eda.videoclub</groupId>
@@ -33,7 +33,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
         </dependency>
-
+        
+        <dependency>
+            <groupId>eda.videoclub</groupId>
+            <artifactId>kafka-messaging</artifactId>
+        </dependency>
 	</dependencies>
 	
 	<build>

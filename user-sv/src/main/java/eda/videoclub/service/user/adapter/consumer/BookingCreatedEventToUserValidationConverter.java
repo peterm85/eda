@@ -4,17 +4,17 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import eda.videoclub.messaging.message.BookingCreatedEvent;
-import eda.videoclub.service.user.domain.entity.UserValidation;
+import eda.videoclub.service.user.command.UserValidationCommand;
 
 @Component
 public class BookingCreatedEventToUserValidationConverter
-    implements Converter<BookingCreatedEvent, UserValidation> {
+    implements Converter<BookingCreatedEvent, UserValidationCommand> {
 
   @Override
-  public UserValidation convert(final BookingCreatedEvent source) {
+  public UserValidationCommand convert(final BookingCreatedEvent source) {
 
-    return UserValidation.builder()
-        .id(source.getId())
+    return UserValidationCommand.builder()
+        .bookingId(source.getId())
         .imdbId(source.getImdbId())
         .userId(source.getUserId())
         .build();
