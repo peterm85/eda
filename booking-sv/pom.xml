@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
+	<name>booking-sv</name>
+	<description>Service to manage bookings</description>
 	<groupId>eda.videoclub.service</groupId>
 	<artifactId>booking-sv</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>booking-sv</name>
-	<description>Service to manage bookings</description>
 	
 	<parent>
 		<groupId>eda.videoclub</groupId>
@@ -32,6 +32,11 @@
 		<dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+            <groupId>eda.videoclub</groupId>
+            <artifactId>kafka-messaging</artifactId>
         </dependency>
 	</dependencies>
 	

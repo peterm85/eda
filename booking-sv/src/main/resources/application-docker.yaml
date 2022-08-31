@@ -2,3 +2,5 @@ spring:
   data:
     mongodb:
       uri: mongodb://mongo:27017/?authSource=admin
+  kafka:
+    bootstrap-servers: kafka-cluster:9092

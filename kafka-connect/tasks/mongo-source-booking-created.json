@@ -17,6 +17,6 @@
         "poll.await.time.ms": "2000",
         "poll.max.batch.size": "1000",
         "publish.full.document.only": "true",
-        "pipeline": [{"$match": {"operationType": "insert"}}]
+        "pipeline": "[{\"$match\": { \"operationType\": \"insert\" }}, {\"$project\": { \"fullDocument.lastUpdateDatetime\": 0 } }]"
     }
 }

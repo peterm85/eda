@@ -3,3 +3,8 @@ spring:
     mongodb:
       database: videoclub
       auto-index-creation: true
+booking-sv:
+  groupId: booking-sv
+  topic:
+    consume:
+      movieReserved: videoclub-movie-reserved      
