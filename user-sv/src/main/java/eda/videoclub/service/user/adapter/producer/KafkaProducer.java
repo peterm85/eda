@@ -5,25 +5,44 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
+import eda.videoclub.messaging.message.UserInvalidatedEvent;
 import eda.videoclub.messaging.message.UserValidatedEvent;
 import eda.videoclub.service.user.command.UserValidationCommand;
+import eda.videoclub.service.user.domain.entity.RejectionReasonVO;
 import eda.videoclub.service.user.port.producer.EventProducer;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class KafkaProducer implements EventProducer {
 
   @Value("${user-sv.topic.produces.userValidated}")
   private String topicName;
 
-  @Autowired private UserValidationToUserValidatedEventConverter converter;
+  @Value("${user-sv.topic.produces.userInvalidated}")
+  private String errorTopicName;
 
-  @Autowired private KafkaTemplate<String, UserValidatedEvent> kafkaTemplate;
+  @Autowired private UserValidationToUserValidatedEventConverter converter;
+  @Autowired private UserValidationToUserInvalidatedEventConverter errorConverter;
+
+  @Autowired private KafkaTemplate<String, Object> kafkaTemplate;
 
   @Override
   public void sendMessage(final UserValidationCommand command) {
 
     final UserValidatedEvent event = converter.convert(command);
 
+    log.info("Publishing event: " + event);
     kafkaTemplate.send(topicName, event);
+  }
+
+  @Override
+  public void sendErrorMessage(
+      final UserValidationCommand command, final RejectionReasonVO reason) {
+
+    final UserInvalidatedEvent event = errorConverter.convert(command, reason);
+
+    log.info("Publishing event: " + event);
+    kafkaTemplate.send(errorTopicName, event);
   }
 }

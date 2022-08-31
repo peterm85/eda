@@ -11,3 +11,4 @@ user-sv:
       bookingCreated: videoclub-bookings-created
     produces:
       userValidated: videoclub-user-validated
+      userInvalidated: videoclub-user-invalidated

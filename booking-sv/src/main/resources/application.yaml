@@ -9,3 +9,4 @@ booking-sv:
     consume:
       movieReserved: videoclub-movie-reserved
       movieRejected: videoclub-movie-rejected
+      userInvalidated: videoclub-user-invalidated

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import eda.videoclub.messaging.message.MovieRejectedEvent;
 import eda.videoclub.messaging.message.MovieReservedEvent;
+import eda.videoclub.messaging.message.UserInvalidatedEvent;
 import eda.videoclub.service.booking.command.CancelBookingCommand;
 import eda.videoclub.service.booking.command.ConfirmBookingCommand;
 import eda.videoclub.service.booking.command.handler.CancelBookingCommandHandler;
@@ -19,7 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 public class KafkaConsumer implements EventConsumer {
 
   @Autowired private MovieReservedEventToConfirmBookingConverter converter;
-  @Autowired private MovieRejectedEventToCancelBookingConverter errorConverter;
+  @Autowired private MovieRejectedEventToCancelBookingConverter errorMovieConverter;
+  @Autowired private UserInvalidatedEventToCancelBookingConverter errorUserConverter;
 
   @Autowired private ConfirmBookingCommandHandler confirmBookingCommandHandler;
   @Autowired private CancelBookingCommandHandler cancelBookingCommandHandler;
@@ -43,7 +45,19 @@ public class KafkaConsumer implements EventConsumer {
       containerFactory = "kafkaContainerFactory")
   public void listen(@Payload final MovieRejectedEvent event) {
     log.info("Receiving event: " + event);
-    final CancelBookingCommand cancelBookingCommand = errorConverter.convert(event);
+    final CancelBookingCommand cancelBookingCommand = errorMovieConverter.convert(event);
+
+    cancelBookingCommandHandler.handle(cancelBookingCommand);
+  }
+
+  @Override
+  @KafkaListener(
+      topics = "#{'${booking-sv.topic.consume.userInvalidated}'}",
+      groupId = "#{'${booking-sv.groupId}'}",
+      containerFactory = "kafkaContainerFactory")
+  public void listen(@Payload final UserInvalidatedEvent event) {
+    log.info("Receiving event: " + event);
+    final CancelBookingCommand cancelBookingCommand = errorUserConverter.convert(event);
 
     cancelBookingCommandHandler.handle(cancelBookingCommand);
   }

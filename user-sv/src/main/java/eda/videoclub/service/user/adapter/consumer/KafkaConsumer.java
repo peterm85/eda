@@ -9,7 +9,9 @@ import eda.videoclub.service.user.adapter.consumer.wrapper.BookingCreatedEventWr
 import eda.videoclub.service.user.command.UserValidationCommand;
 import eda.videoclub.service.user.command.handler.UserValidationCommandHandler;
 import eda.videoclub.service.user.port.consumer.EventConsumer;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class KafkaConsumer implements EventConsumer {
 
@@ -27,6 +29,8 @@ public class KafkaConsumer implements EventConsumer {
         "spring.json.key.default.type=eda.videoclub.messaging.wrapper.base.MongoDBSourceConnectorWrapperKey"
       })
   public void listen(@Payload final BookingCreatedEventWrapperMessage event) {
+
+    log.info("Receiving event: " + event);
 
     final UserValidationCommand userValidationCommand = converter.convert(event.getPayload());
 
