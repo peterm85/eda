@@ -15,7 +15,9 @@ public class Booking {
 
   private String userId;
 
-  private BookingStatus status;
+  private BookingStatusVO status;
+
+  private RejectionReasonVO reason;
 
   private Instant lastUpdateDatetime;
 }

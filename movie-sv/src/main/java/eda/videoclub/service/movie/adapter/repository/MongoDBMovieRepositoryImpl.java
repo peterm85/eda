@@ -9,6 +9,7 @@ import eda.videoclub.service.movie.adapter.repository.converter.MovieEntityToMov
 import eda.videoclub.service.movie.adapter.repository.converter.MovieToMovieEntityConverter;
 import eda.videoclub.service.movie.adapter.repository.entity.MovieEntity;
 import eda.videoclub.service.movie.domain.entity.Movie;
+import eda.videoclub.service.movie.exception.MovieNotFoundException;
 import eda.videoclub.service.movie.port.repository.MovieRepository;
 
 @Repository
@@ -32,7 +33,7 @@ public class MongoDBMovieRepositoryImpl implements MovieRepository {
     if (!entityResults.isEmpty() && entityResults.size() == 1) {
       return movieEntityToMovieConverter.convert(entityResults.get(0));
     } else {
-      throw new Exception("Movie with imbdId " + movieId + " not found");
+      throw new MovieNotFoundException("Movie with imbdId " + movieId + " not found");
     }
   }
 

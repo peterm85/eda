@@ -8,7 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import eda.videoclub.service.booking.adapter.rest.converter.BookingToBookingResponseConverter;
 import eda.videoclub.service.booking.domain.entity.Booking;
-import eda.videoclub.service.booking.domain.entity.BookingStatus;
+import eda.videoclub.service.booking.domain.entity.BookingStatusVO;
 import eda.videoclub.service.booking.port.rest.api.model.BookingResponse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +26,7 @@ public class BookingToBookingResponseConverterTest {
         Booking.builder()
             .imdbId("tt0120737")
             .userId("62fe1a48df883b786b2eaf0")
-            .status(BookingStatus.CREATED)
+            .status(BookingStatusVO.CREATED)
             .lastUpdateDatetime(Instant.now())
             .build();
     // when

@@ -10,3 +10,4 @@ movie-sv:
       userValidated: videoclub-user-validated
     produces:
       movieReserved: videoclub-movie-reserved
+      movieRejected: videoclub-movie-rejected

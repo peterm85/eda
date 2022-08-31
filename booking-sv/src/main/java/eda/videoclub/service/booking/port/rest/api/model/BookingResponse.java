@@ -4,7 +4,7 @@ import java.time.Instant;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import eda.videoclub.service.booking.domain.entity.BookingStatus;
+import eda.videoclub.service.booking.domain.entity.BookingStatusVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class BookingResponse {
   private String userId;
 
   @ApiModelProperty(notes = "Booking status", example = "CREATED", required = true)
-  private BookingStatus status;
+  private BookingStatusVO status;
 
   @ApiModelProperty(notes = "Last update datetime", example = "2022-09-10", required = true)
   @JsonFormat(pattern = DATE_FORMAT, timezone = TIMEZONE)

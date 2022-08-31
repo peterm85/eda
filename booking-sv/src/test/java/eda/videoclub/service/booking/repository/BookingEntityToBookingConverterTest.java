@@ -8,8 +8,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import eda.videoclub.service.booking.adapter.repository.converter.BookingEntityToBookingConverter;
 import eda.videoclub.service.booking.adapter.repository.entity.BookingEntity;
+import eda.videoclub.service.booking.adapter.repository.entity.BookingStatus;
 import eda.videoclub.service.booking.domain.entity.Booking;
-import eda.videoclub.service.booking.domain.entity.BookingStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -38,7 +38,7 @@ public class BookingEntityToBookingConverterTest {
     assertEquals(result.getId(), source.getId());
     assertEquals(result.getImdbId(), source.getImdbId());
     assertEquals(result.getUserId(), source.getUserId());
-    assertEquals(result.getStatus(), source.getStatus());
+    assertEquals(result.getStatus().toString(), source.getStatus().toString());
     assertEquals(result.getLastUpdateDatetime(), source.getLastUpdateDatetime());
   }
 }

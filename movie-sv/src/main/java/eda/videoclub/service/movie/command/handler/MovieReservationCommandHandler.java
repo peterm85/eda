@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import eda.videoclub.service.movie.command.MovieReservationCommand;
 import eda.videoclub.service.movie.domain.entity.Movie;
+import eda.videoclub.service.movie.exception.ExceptionManager;
 import eda.videoclub.service.movie.port.producer.EventProducer;
 import eda.videoclub.service.movie.service.MovieService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ public class MovieReservationCommandHandler {
 
   @Autowired private MovieService movieService;
   @Autowired private EventProducer eventProducer;
+  @Autowired private ExceptionManager exceptionManager;
 
   public void handle(final MovieReservationCommand command) {
 
@@ -29,8 +31,9 @@ public class MovieReservationCommandHandler {
           updatedMovie.getStock());
 
       eventProducer.sendMessage(command);
-    } catch (Exception e) {
-      log.error(e.getMessage());
+
+    } catch (Exception ex) {
+      exceptionManager.handler(command, ex);
     }
   }
 }

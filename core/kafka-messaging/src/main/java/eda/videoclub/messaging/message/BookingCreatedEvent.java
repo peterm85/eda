@@ -22,5 +22,5 @@ public class BookingCreatedEvent {
 
   private String userId;
 
-  private BookingStatus status;
+  private BookingStatusEnum status;
 }

@@ -17,7 +17,9 @@ import eda.videoclub.service.booking.port.rest.BookingController;
 import eda.videoclub.service.booking.port.rest.api.model.BookingRequest;
 import eda.videoclub.service.booking.port.rest.api.model.BookingResponse;
 import eda.videoclub.service.booking.service.BookingService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping("/videoclub")
 @RestController
 public class BookingControllerImpl implements BookingController {
@@ -33,6 +35,7 @@ public class BookingControllerImpl implements BookingController {
   @Override
   @PostMapping(value = MOVIE_PATH)
   public ResponseEntity<BookingResponse> bookMovie(@Valid @NotNull final BookingRequest request) {
+    log.info("Receiving request: " + request);
 
     final Booking booking = bookingRequestToBookingConverter.convert(request);
     final BookingResponse response =

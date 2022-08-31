@@ -7,7 +7,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import eda.videoclub.service.booking.domain.entity.BookingStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,6 +28,8 @@ public class BookingEntity {
   private String userId;
 
   private BookingStatus status;
+
+  private RejectionReason reason;
 
   @LastModifiedDate private Instant lastUpdateDatetime;
 

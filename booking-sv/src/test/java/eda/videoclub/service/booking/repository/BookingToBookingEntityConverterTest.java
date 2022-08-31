@@ -7,7 +7,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import eda.videoclub.service.booking.adapter.repository.converter.BookingToBookingEntityConverter;
 import eda.videoclub.service.booking.adapter.repository.entity.BookingEntity;
 import eda.videoclub.service.booking.domain.entity.Booking;
-import eda.videoclub.service.booking.domain.entity.BookingStatus;
+import eda.videoclub.service.booking.domain.entity.BookingStatusVO;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -24,7 +24,7 @@ public class BookingToBookingEntityConverterTest {
         Booking.builder()
             .imdbId("tt0120737")
             .userId("62fe1a48df883b786b2eaf0")
-            .status(BookingStatus.CREATED)
+            .status(BookingStatusVO.CREATED)
             .build();
     // when
     final BookingEntity result = converter.convert(source);
@@ -33,6 +33,6 @@ public class BookingToBookingEntityConverterTest {
     assertNotNull(result);
     assertEquals(result.getImdbId(), source.getImdbId());
     assertEquals(result.getUserId(), source.getUserId());
-    assertEquals(result.getStatus(), source.getStatus());
+    assertEquals(result.getStatus().toString(), source.getStatus().toString());
   }
 }

@@ -1,6 +1,6 @@
 package eda.videoclub.messaging.message;
 
-public enum BookingStatus {
+public enum BookingStatusEnum {
   CREATED,
   CONFIRMED,
   CANCELLED

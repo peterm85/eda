@@ -7,7 +7,7 @@ import eda.videoclub.messaging.message.MovieReservedEvent;
 import eda.videoclub.service.booking.command.ConfirmBookingCommand;
 
 @Component
-public class MovieReservationEventToConfirmBookingConverter
+public class MovieReservedEventToConfirmBookingConverter
     implements Converter<MovieReservedEvent, ConfirmBookingCommand> {
 
   @Override

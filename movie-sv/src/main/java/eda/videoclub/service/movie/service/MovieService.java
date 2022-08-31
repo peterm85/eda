@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import eda.videoclub.service.movie.domain.entity.Movie;
+import eda.videoclub.service.movie.exception.MovieNotAvailableException;
 import eda.videoclub.service.movie.port.repository.MovieRepository;
 
 @Service
@@ -19,7 +20,7 @@ public class MovieService {
     final Movie movie = movieRepository.getByImdbId(imdbId);
 
     if (movie.getStock() == 0)
-      throw new Exception("Not enough stock for movie with imbdId " + imdbId);
+      throw new MovieNotAvailableException("Not enough stock for movie with imbdId " + imdbId);
     else movie.setStock(movie.getStock() - 1);
 
     return movieRepository.update(movie);

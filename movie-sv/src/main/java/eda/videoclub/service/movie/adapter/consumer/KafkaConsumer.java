@@ -9,7 +9,9 @@ import eda.videoclub.messaging.message.UserValidatedEvent;
 import eda.videoclub.service.movie.command.MovieReservationCommand;
 import eda.videoclub.service.movie.command.handler.MovieReservationCommandHandler;
 import eda.videoclub.service.movie.port.consumer.EventConsumer;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class KafkaConsumer implements EventConsumer {
 
@@ -22,7 +24,7 @@ public class KafkaConsumer implements EventConsumer {
       groupId = "#{'${movie-sv.groupId}'}",
       containerFactory = "kafkaContainerFactory")
   public void listen(@Payload final UserValidatedEvent event) {
-
+    log.info("Receiving event: " + event);
     final MovieReservationCommand movieReservationCommand = converter.convert(event);
 
     movieReservationCommandHandler.handle(movieReservationCommand);

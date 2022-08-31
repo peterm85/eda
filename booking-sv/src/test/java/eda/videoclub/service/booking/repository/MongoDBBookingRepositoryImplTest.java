@@ -14,8 +14,9 @@ import eda.videoclub.service.booking.adapter.repository.MongoDBBookingRepository
 import eda.videoclub.service.booking.adapter.repository.converter.BookingEntityToBookingConverter;
 import eda.videoclub.service.booking.adapter.repository.converter.BookingToBookingEntityConverter;
 import eda.videoclub.service.booking.adapter.repository.entity.BookingEntity;
+import eda.videoclub.service.booking.adapter.repository.entity.BookingStatus;
 import eda.videoclub.service.booking.domain.entity.Booking;
-import eda.videoclub.service.booking.domain.entity.BookingStatus;
+import eda.videoclub.service.booking.domain.entity.BookingStatusVO;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -36,7 +37,7 @@ public class MongoDBBookingRepositoryImplTest {
         Booking.builder()
             .imdbId("tt0120737")
             .userId("62fe1a48df883b786b2eaf0")
-            .status(BookingStatus.CREATED)
+            .status(BookingStatusVO.CREATED)
             .build();
 
     final BookingEntity entity =

@@ -7,4 +7,5 @@ booking-sv:
   groupId: booking-sv
   topic:
     consume:
-      movieReserved: videoclub-movie-reserved      
+      movieReserved: videoclub-movie-reserved
+      movieRejected: videoclub-movie-rejected
