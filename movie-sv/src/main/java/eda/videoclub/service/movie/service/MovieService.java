@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import eda.videoclub.service.movie.domain.entity.Movie;
 import eda.videoclub.service.movie.exception.MovieNotAvailableException;
 import eda.videoclub.service.movie.port.repository.MovieRepository;
+import lombok.Synchronized;
 
 @Service
 public class MovieService {
@@ -16,6 +17,7 @@ public class MovieService {
     return movieRepository.create(movie);
   }
 
+  @Synchronized
   public Movie reserveMovie(final String imdbId) throws Exception {
     final Movie movie = movieRepository.getByImdbId(imdbId);
 

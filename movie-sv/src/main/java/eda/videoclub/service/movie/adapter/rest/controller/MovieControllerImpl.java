@@ -17,7 +17,9 @@ import eda.videoclub.service.movie.port.rest.MovieController;
 import eda.videoclub.service.movie.port.rest.api.model.MovieRequest;
 import eda.videoclub.service.movie.port.rest.api.model.MovieResponse;
 import eda.videoclub.service.movie.service.MovieService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequestMapping("/videoclub")
 @RestController
 public class MovieControllerImpl implements MovieController {
@@ -33,6 +35,7 @@ public class MovieControllerImpl implements MovieController {
   @Override
   @PostMapping(value = MOVIE_PATH)
   public ResponseEntity<MovieResponse> create(@Valid @NotNull final MovieRequest request) {
+    log.info("Receiving request: " + request);
 
     final Movie movie = movieRequestToMovieConverter.convert(request);
     final MovieResponse response =

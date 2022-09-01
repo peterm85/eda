@@ -1,5 +1,7 @@
 package eda.videoclub.service.user.adapter.producer;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -33,7 +35,7 @@ public class KafkaProducer implements EventProducer {
     final UserValidatedEvent event = converter.convert(command);
 
     log.info("Publishing event: " + event);
-    kafkaTemplate.send(topicName, event);
+    kafkaTemplate.send(topicName, UUID.randomUUID().toString(), event);
   }
 
   @Override
@@ -43,6 +45,6 @@ public class KafkaProducer implements EventProducer {
     final UserInvalidatedEvent event = errorConverter.convert(command, reason);
 
     log.info("Publishing event: " + event);
-    kafkaTemplate.send(errorTopicName, event);
+    kafkaTemplate.send(errorTopicName, UUID.randomUUID().toString(), event);
   }
 }
