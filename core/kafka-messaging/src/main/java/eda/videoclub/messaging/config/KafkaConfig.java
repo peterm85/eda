@@ -37,6 +37,18 @@ public class KafkaConfig {
     configMap.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
     configMap.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
     configMap.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+    configMap.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
+
+    configMap.put(
+        ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG,
+        "200000"); // Max time to poll for new records again by the processing thread. If it cannot
+    // process all the records yet, the heartbeat thread will detect this case and it will send a
+    // leave-group request to the broker.
+    configMap.put(
+        ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "100"); // Number of records per consumer poll
+    configMap.put(
+        ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG,
+        "40000"); // Max time to send a heartbeat by the heardbeat thread.
 
     return configMap;
   }
