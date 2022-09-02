@@ -40,7 +40,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\"name\": \"mongo-source-movie\",\r\n    \"config\": {\r\n        \"connector.class\":\"com.mongodb.kafka.connect.MongoSourceConnector\",\r\n        \"connection.uri\":\"mongodb://mongo:27017\",\r\n        \"database\":\"videoclub\",\r\n        \"collection\":\"movies\",\r\n        \"tasks.max\": 1,\r\n        \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n        \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n        \"mongo.errors.tolerance\": \"all\",\r\n        \"mongo.errors.log.enable\": \"true\",\r\n        \"poll.await.time.ms\": \"2000\",\r\n        \"poll.max.batch.size\": \"1000\"\r\n    }\r\n}",
+							"raw": "{\"name\": \"mongo-source-booking-created\",\r\n    \"config\": {\r\n        \"connector.class\":\"com.mongodb.kafka.connect.MongoSourceConnector\",\r\n        \"tasks.max\": 1,\r\n        \"key.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n        \"value.converter\": \"org.apache.kafka.connect.json.JsonConverter\",\r\n\r\n        \"connection.uri\":\"mongodb://mongo:27017\",\r\n        \"database\":\"videoclub\",\r\n        \"collection\":\"bookings\",\r\n        \"mongo.errors.tolerance\": \"all\",\r\n        \"mongo.errors.log.enable\": \"true\",\r\n\r\n        \"topic.separator\": \"-\",\r\n        \"topic.suffix\": \"created\",\r\n\r\n        \"poll.await.time.ms\": \"2000\",\r\n        \"poll.max.batch.size\": \"1000\",\r\n        \"publish.full.document.only\": \"true\",\r\n        \"pipeline\": \"[{\\\"$match\\\": { \\\"operationType\\\": \\\"insert\\\" }}, {\\\"$project\\\": { \\\"fullDocument.lastUpdateDatetime\\\": 0 } }]\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -67,7 +67,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8083/connectors/{CONNECTOR_NAME}",
+							"raw": "http://localhost:8083/connectors/mongo-source-booking-created",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -75,7 +75,7 @@
 							"port": "8083",
 							"path": [
 								"connectors",
-								"{CONNECTOR_NAME}"
+								"mongo-source-booking-created"
 							]
 						}
 					},
@@ -90,7 +90,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"imdbId\":\"1234567891\",\r\n    \"name\":\"Kill Bill\",\r\n    \"stock\":\"5\"\r\n}",
+					"raw": "{\r\n    \"imdbId\":\"1234567890\",\r\n    \"name\":\"The Lord of the Rings - The two towers\",\r\n    \"stock\":\"50\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -148,7 +148,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"imdbId\": \"1234567890\",\r\n    \"userId\": \"62ff56051713d57a75dc1726\"\r\n}",
+					"raw": "{\r\n    \"imdbId\": \"1234567894\",\r\n    \"userId\": \"631058dc9a22437c0e0ae234\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

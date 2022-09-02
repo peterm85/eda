@@ -1,9 +1,13 @@
 # booking-sv
 
 * **Version:** 0.0.1-SNAPSHOT
-* **Description:** Service for managing booking
+* **Description:** Service for managing bookings
 
 ## REST Endpoints
+
+### /swagger-ui/index.html
+
+* **GET**
 
 ### /videoclub
 
@@ -36,4 +40,10 @@
 
 **Database:** videoclub
 
-* **Collection:** booking (collection to store bookings)
+* **Collection:** bookings (collection to store bookings)
+
+## Event Consumer
+
+* **Topic:** videoclub-movie-reserved (event message to communicate the movie reservation)
+* **Topic:** videoclub-movie-rejected (event message to communicate issues with the movie reservation)
+* **Topic:** videoclub-user-invalidated (event message to communicate issues with the user validation)

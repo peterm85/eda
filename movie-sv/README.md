@@ -5,6 +5,10 @@
 
 ## REST Endpoints
 
+### /swagger-ui/index.html
+
+* **GET**
+
 ### /videoclub
 
 * **POST:**
@@ -37,3 +41,12 @@
 **Database:** videoclub
 
 * **Collection:** movies (collection to store movies)
+
+## Event Consumer
+
+* **Topic:** videoclub-user-validated (event message to communicate the user validation)
+
+## Event Producer
+
+* **Topic:** videoclub-movie-reserved (event message to communicate the movie reservation)
+* **Topic:** videoclub-movie-rejected (event message to communicate issues with the movie reservation)
