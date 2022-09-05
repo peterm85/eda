@@ -1,0 +1,12 @@
+spring:  
+  kafka:
+    bootstrap-servers: ${spring.embedded.kafka.brokers}
+    
+user-sv:
+  groupId: user-sv
+  topic:
+    consume:
+      bookingCreated: videoclub-bookings-created
+    produces:
+      userValidated: videoclub-user-validated
+      userInvalidated: videoclub-user-invalidated

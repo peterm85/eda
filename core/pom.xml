@@ -39,6 +39,9 @@
         
         <!-- libs -->
         <swagger.version>3.0.0</swagger.version>
+        <junit.version>5.8.2</junit.version>
+        <junit4.version>4.13.2</junit4.version>
+        <testcontainers.version>1.16.2</testcontainers.version>
 
     </properties>
 
@@ -63,10 +66,33 @@
                 <artifactId>springfox-swagger2</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>kafka</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit4.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
             <!-- CORE - components -->
             <dependency>
                 <groupId>eda.videoclub</groupId>
                 <artifactId>kafka-messaging</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>eda.videoclub</groupId>
+                <artifactId>kafka-messaging-test</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             
@@ -94,6 +120,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
 
     <build>
@@ -130,6 +157,7 @@
 
     <modules>
         <module>kafka-messaging</module>
+        <module>kafka-messaging-test</module>
     </modules>
     
 </project>
